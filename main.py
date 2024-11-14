@@ -6,8 +6,6 @@ from customtkinter import (
     CTkEntry,
     CTkScrollableFrame,
     CTkImage,
-    CTkToplevel,
-    CTkLabel,
     set_appearance_mode,
 )
 from tkinter import END, IntVar
@@ -46,11 +44,9 @@ connection = pymysql.connect(
 
 cursor = connection.cursor()
 
-# Recreate taskTable with the correct columns
-cursor.execute("DROP TABLE IF EXISTS taskTable;")  # Drop the table if it exists
 cursor.execute(
     """
-    CREATE TABLE taskTable(
+    CREATE TABLE IF NOT EXISTS taskTable(
         taskString TEXT,
         dueDate DATE,
         status INTEGER
